@@ -29,7 +29,7 @@ class MACD:
         long_ema = pd.Series.ewm(last_hour, span=26).mean().iloc[-1]
         short_ema = pd.Series.ewm(last_hour, span=12).mean().iloc[-1]
 
-        macd = long_ema - short_ema
+        macd = short_ema - long_ema
         
         print(f"{self.stock} : {macd} | Holding: {self.holding}")
 
