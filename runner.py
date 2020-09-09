@@ -29,6 +29,7 @@ def main():
         awaitMarketOpen()
         for runner in runners:
             runner.run()
+            time.sleep(1)
         time.sleep(60)
 
 if __name__ == "__main__":
