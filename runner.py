@@ -21,15 +21,15 @@ def awaitMarketOpen():
 def main():
     runners = [MACD(stock, 10, alpaca) for stock in STOCKS]
 
-    try:
-        while True:
+    while True:
+        try:
             awaitMarketOpen()
             for runner in runners:
                 runner.run()
                 time.sleep(1)
             time.sleep(60)
-    except ConnectionError as e:
-        print(f"connection error: {e}")
+        except ConnectionError as e:
+            print(f"connection error: {e}")
 
 if __name__ == "__main__":
     main()
