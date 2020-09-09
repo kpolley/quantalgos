@@ -15,7 +15,7 @@ def awaitMarketOpen():
     while not alpaca.get_clock().is_open:
         next_open = alpaca.get_clock().next_open.replace(tzinfo=datetime.timezone.utc).timestamp()
         current_time = alpaca.get_clock().timestamp.replace(tzinfo=datetime.timezone.utc).timestamp()
-        time_until_open = int((openingTime - currTime) / 60)
+        time_until_open = int((next_open - current_time) / 60)
         print(f"After hours. Next open in {time_until_open} seconds")
         time.sleep(time_until_open + 60)
 def main():
@@ -26,7 +26,6 @@ def main():
             awaitMarketOpen()
             for runner in runners:
                 runner.run()
-                time.sleep(1)
             time.sleep(60)
         except ConnectionError as e:
             print(f"connection error: {e}")
